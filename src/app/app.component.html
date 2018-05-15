@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-12 image-selection">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Enter palette URL"
+                 [(ngModel)]="paletteUrl">
+          <div class="flex-image-container">
+            <div class="image-container"
+                 [ngStyle]="{'background-image': 'url(' + paletteUrl + ')'}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 image-selection">
+          <input type="text" class="form-control" placeholder="Enter palette URL" [(ngModel)]="imageUrl">
+          <div class="flex-image-container">
+            <div class="image-container">
+              <div class="image-container"
+                   [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <div class="col-md-12 info-window">
+          {{toDataURL(paletteUrl)}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="canvas-wrapper">
+        <canvas id="main-container" class="overlaping-canvas" width="800" height="800"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

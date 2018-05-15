@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen+Mono');
+@import "~bootstrap/dist/css/bootstrap.css";
+
+* {
+  font-size: 12px;
+  line-height: 1.2;
+  font-family: 'Oxygen Mono', monospace;
+}
+.btn, .btn-sm {
+  border-radius: 0;
+}
+.f-c-normal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+}
+.f-r-normal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: flex-start;
+}
+.f-c-between {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: flex-start;
+}
+a.active.focus,
+a.active:focus,
+a.focus,
+a:active.focus,
+a:active:focus,
+a:focus,
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: 0;
+  outline-color: transparent;
+  outline-width: 0;
+  outline-style: none;
+  box-shadow: 0 0 0 0 rgba(0,123,255,0);
+}
+.number-input {
+  width: 70px;
+  border: 1px solid #f8f9fa;
+  text-align: center;
+}
+.width100 {
+  width: 100%;
+}
+.modal-dialog {
+  max-width: 700px !important;
+}
+.dark-modal .modal-content {
+  background-color: #393b3c;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.modal-content {
+  border-radius: 0;
+  box-shadow: 5px 5px 6px 0 rgba(0,0,0,0.59);
+}

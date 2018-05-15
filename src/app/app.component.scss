@@ -1,0 +1,36 @@
+.canvas-wrapper {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.overlaping-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.flex-image-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  .image-container {
+    height: 100%;
+    width: 100%;
+    min-height: 400px;
+    min-width: 620px;
+    margin: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+.image-selection {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #393b3c;
+}
+.info-window {
+  margin: 0 5px 0 5px;
+}
