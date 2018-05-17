@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as $ from 'jquery';
 declare var kd;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppComponent  implements OnInit {
@@ -19,7 +21,11 @@ export class AppComponent  implements OnInit {
   mainCanvas: any;
   mainCtx: any;
 
-  constructor() {
+  numberOfColours = 255 * 255 * 255;
+  palettePixels = [];
+  differentColours = 0;
+
+  constructor(private cdr: ChangeDetectorRef) {
 
   }
 
@@ -28,6 +34,9 @@ export class AppComponent  implements OnInit {
       kd.tick();
     }, 25);
 
+    for (let a = 0; a < this.numberOfColours; a++) {
+      this.palettePixels[a] = 0;
+    }
     this.htmlContainer = $('html');
     this.mainContainer = $('#main-container');
     this.mainCanvas = <HTMLCanvasElement>document.getElementById('main-container');
@@ -45,17 +54,39 @@ export class AppComponent  implements OnInit {
     this.mainCtx.putImageData(imageData, 0, 0);
   }
 
-  toDataURL(url: string) {
-    if (url.length > 5) {
-      return fetch(url)
-        .then((response) => {
-          return response.blob();
-        })
-        .then(blob => {
-          return URL.createObjectURL(blob);
-        });
-    } else {
-      return '';
-    }
+  async paletteChanged() {
+    const img: HTMLImageElement = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      const {data32, width, height, ctx} = this.getData32(img);
+      for (let a = 0; a < data32.length; a += 4) {
+        const index = data32[a] * 255 * 255 + data32[a + 1] * 255 + data32[a + 2];
+        this.palettePixels[index]++;
+      }
+      for (let a = 0; a < this.numberOfColours; a++) {
+        if (this.palettePixels[a] > 0) {
+          this.differentColours++;
+        }
+      }
+      console.log(this.differentColours);
+      this.cdr.markForCheck();
+    };
+    img.src = this.paletteUrl;
+  }
+
+  imageChanged() {
+
+  }
+
+  getData32(img: HTMLImageElement): any {
+    const canvas: any = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx: any = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    // const imageData = ctx.createImageData(canvas.width, canvas.height);
+    // const data32 = new Uint32Array(imageData.data.buffer);
+    const data32 = new Uint32Array(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
+    return {data32: data32, width: canvas.width, height: canvas.height, ctx: ctx};
   }
 }

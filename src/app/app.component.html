@@ -6,7 +6,8 @@
           <input type="text"
                  class="form-control"
                  placeholder="Enter palette URL"
-                 [(ngModel)]="paletteUrl">
+                 [(ngModel)]="paletteUrl"
+                 (ngModelChange)="paletteChanged()">
           <div class="flex-image-container">
             <div class="image-container"
                  [ngStyle]="{'background-image': 'url(' + paletteUrl + ')'}">
@@ -16,7 +17,11 @@
       </div>
       <div class="row">
         <div class="col-md-12 image-selection">
-          <input type="text" class="form-control" placeholder="Enter palette URL" [(ngModel)]="imageUrl">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Enter image URL"
+                 [(ngModel)]="imageUrl"
+                 (ngModelChange)="imageChanged()">
           <div class="flex-image-container">
             <div class="image-container">
               <div class="image-container"
@@ -30,7 +35,7 @@
     <div class="col-md-2">
       <div class="row">
         <div class="col-md-12 info-window">
-          {{toDataURL(paletteUrl)}}
+          Different colours: {{differentColours}}
         </div>
       </div>
     </div>
