@@ -3,11 +3,6 @@
   height: auto;
   position: relative;
 }
-.overlaping-canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 .flex-image-container {
   display: flex;
   flex-direction: row;
@@ -18,8 +13,8 @@
   .image-container {
     height: 100%;
     width: 100%;
-    min-height: 400px;
-    min-width: 620px;
+    min-height: 350px;
+    min-width: 550px;
     margin: 5px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -27,7 +22,6 @@
   }
 }
 .image-selection {
-  margin: 5px;
   padding: 5px;
   border: 1px solid #393b3c;
 }

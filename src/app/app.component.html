@@ -1,48 +1,60 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-12 image-selection">
+    <div class="col-md-5">
+      <div class="row m-1">
+        <div class="col-md-8 image-selection">
           <input type="text"
                  class="form-control"
                  placeholder="Enter palette URL"
-                 [(ngModel)]="paletteUrl"
-                 (ngModelChange)="paletteChanged()">
+                 [(ngModel)]="images[0].url"
+                 (ngModelChange)="calculateImage(images[0])">
           <div class="flex-image-container">
             <div class="image-container"
-                 [ngStyle]="{'background-image': 'url(' + paletteUrl + ')'}">
+                 [ngStyle]="{'background-image': 'url(' + images[0].url + ')'}">
             </div>
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="standard-text mt-2">Size: {{images[0].width}} X {{images[0].height}}</div>
+          <div class="standard-text mt-2">Palette colors:</div>
+          <div class="standard-text mt-2">{{images[0].colors}}</div>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 image-selection">
+      <div class="row m-1">
+        <div class="col-md-8 image-selection">
           <input type="text"
                  class="form-control"
-                 placeholder="Enter image URL"
-                 [(ngModel)]="imageUrl"
-                 (ngModelChange)="imageChanged()">
+                 placeholder="Enter palette URL"
+                 [(ngModel)]="images[1].url"
+                 (ngModelChange)="calculateImage(images[1])">
           <div class="flex-image-container">
-            <div class="image-container">
-              <div class="image-container"
-                   [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}">
-              </div>
+            <div class="image-container"
+                 [ngStyle]="{'background-image': 'url(' + images[1].url + ')'}">
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="row">
-        <div class="col-md-12 info-window">
-          Different colours: {{differentColours}}
+        <div class="col-md-4">
+          <div class="standard-text mt-2">Size: {{images[1].width}} X {{images[1].height}}</div>
+          <div class="standard-text mt-2">Palette colors:</div>
+          <div class="standard-text mt-2">{{images[1].colors}}</div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7 p-1">
+      <div class="btn btn-dark m-1"
+           *ngIf="images[0].colors == 0 || images[1].colors == 0">
+        Select 2 images
+      </div>
+      <div class="btn btn-success m-1"
+           *ngIf="images[0].colors > 0 && images[1].colors > 0"
+           (click)="paletteSwap()">
+        Pallet swap
+      </div>
       <div class="canvas-wrapper">
-        <canvas id="main-container" class="overlaping-canvas" width="800" height="800"></canvas>
+        <canvas id="main-container" width="800" height="800"></canvas>
       </div>
     </div>
   </div>
 </div>
+https://i.imgur.com/4koURS7.png<br>
+https://i.imgur.com/IhR8tZK.png
